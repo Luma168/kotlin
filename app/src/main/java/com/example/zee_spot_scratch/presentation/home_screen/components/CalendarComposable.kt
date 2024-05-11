@@ -1,4 +1,4 @@
-package com.example.zee_spot_scratch.calendar
+package com.example.zee_spot_scratch.presentation.home_screen.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -27,6 +26,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -46,8 +46,10 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.zee_spot_scratch.data.Rdv
-import com.example.zee_spot_scratch.data.RdvViewModel
+import androidx.navigation.NavController
+import com.example.zee_spot_scratch.presentation.navigation.Screen
+import com.example.zee_spot_scratch.domain.model.Rdv
+import com.example.zee_spot_scratch.presentation.RdvViewModel
 import com.kizitonwose.calendar.compose.HorizontalCalendar
 import com.kizitonwose.calendar.compose.rememberCalendarState
 import com.kizitonwose.calendar.core.CalendarDay
@@ -71,6 +73,7 @@ private val inActiveTextColor: Color @Composable get() = Color.Gray
 @Composable
 fun CalendarComposable(
     viewModel: RdvViewModel = hiltViewModel(),
+    navController: NavController
 ) {
     val currentMonth = remember { YearMonth.now() }
     val startMonth = remember { currentMonth.minusMonths(500) }
@@ -140,7 +143,7 @@ fun CalendarComposable(
 
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
             items(items = sortedRdvs[selection?.date]?.sortedBy { it.startTime } ?: emptyList()) { rdv ->
-                RdvInformation(rdv, viewModel)
+                RdvInformation(rdv, viewModel, navController)
             }
         }
 
@@ -178,11 +181,6 @@ private fun Day(
             .size(70.dp)
             .aspectRatio(1f)
             .background(color = itemBackgroundColor)
-            // Disable clicks on inDates/outDates
-            .clickable(
-                enabled = day.position == DayPosition.MonthDate,
-                onClick = { onClick(day) },
-            ),
     ) {
         val (dateBox, bubble) = createRefs()
         Box(
@@ -194,7 +192,12 @@ private fun Day(
                 .constrainAs(dateBox) {
                     centerHorizontallyTo(parent)
                     centerVerticallyTo(parent)
-                },
+                }
+                // Disable clicks on inDates/outDates
+                .clickable(
+                    enabled = day.position == DayPosition.MonthDate,
+                    onClick = { onClick(day) },
+                ),
         ) {
             val textColor = when (day.position) {
                 DayPosition.MonthDate -> if (isSelected) itemBackgroundColor else Color.Black
@@ -254,6 +257,7 @@ private fun DayBar(
 private fun LazyItemScope.RdvInformation(
     rdv: Rdv,
     viewModel: RdvViewModel,
+    navController: NavController
 ) {
     Row(
         modifier = Modifier
@@ -265,7 +269,7 @@ private fun LazyItemScope.RdvInformation(
     ) {
         Column(
             modifier = Modifier
-                .weight(1f)
+                .weight(1.5f)
                 .padding(5.dp)
                 .fillMaxHeight(),
             verticalArrangement = Arrangement.SpaceBetween,
@@ -339,13 +343,6 @@ private fun LazyItemScope.RdvInformation(
                             color = toolbarColor
                         )
                     }
-                    IconButton(onClick = { viewModel.deleteRdv(rdv) }) {
-                        Icon(
-                            imageVector = Icons.Default.Delete,
-                            contentDescription = null,
-                            tint = toolbarColor,
-                        )
-                    }
                 }
             }
             Text(
@@ -364,6 +361,30 @@ private fun LazyItemScope.RdvInformation(
                     fontSize = 15.sp,
                     fontWeight = FontWeight.Medium,
                     color = toolbarColor
+                )
+            }
+        }
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .padding(5.dp)
+                .fillMaxHeight(),
+            verticalArrangement = Arrangement.SpaceBetween,
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            IconButton(onClick = { viewModel.deleteRdv(rdv) }) {
+                Icon(
+                    imageVector = Icons.Default.Delete,
+                    contentDescription = null,
+                    tint = toolbarColor,
+                )
+            }
+
+            IconButton(onClick = { navController.navigate(route = "${Screen.UpdateRdv.route}/${rdv.id}") }) {
+                Icon(
+                    imageVector = Icons.Default.Edit,
+                    contentDescription = null,
+                    tint = toolbarColor,
                 )
             }
         }

@@ -1,4 +1,4 @@
-package com.example.zee_spot_scratch.calendar
+package com.example.zee_spot_scratch.presentation.home_screen.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box

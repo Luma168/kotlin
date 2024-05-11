@@ -1,4 +1,4 @@
-package com.example.zee_spot_scratch.calendar
+package com.example.zee_spot_scratch.presentation.home_screen.components
 
 import android.annotation.SuppressLint
 import android.app.Activity

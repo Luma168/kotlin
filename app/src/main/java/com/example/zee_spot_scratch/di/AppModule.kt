@@ -1,7 +1,10 @@
-package com.example.zee_spot_scratch.data
+package com.example.zee_spot_scratch.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.zee_spot_scratch.data.local.RdvDao
+import com.example.zee_spot_scratch.data.local.RdvDatabase
+import com.example.zee_spot_scratch.data.repository.RdvRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

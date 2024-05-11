@@ -1,4 +1,4 @@
-package com.example.zee_spot_scratch.components
+package com.example.zee_spot_scratch.presentation.common
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

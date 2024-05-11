@@ -1,11 +1,10 @@
-package com.example.zee_spot_scratch.components
+package com.example.zee_spot_scratch.presentation.new_rdv_screen.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -39,9 +38,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.zee_spot_scratch.R
-import com.example.zee_spot_scratch.Screen
-import com.example.zee_spot_scratch.data.Rdv
-import com.example.zee_spot_scratch.data.RdvViewModel
+import com.example.zee_spot_scratch.presentation.navigation.Screen
+import com.example.zee_spot_scratch.domain.model.Rdv
+import com.example.zee_spot_scratch.presentation.RdvViewModel
 import com.maxkeppeker.sheets.core.models.base.rememberSheetState
 import com.maxkeppeler.sheets.calendar.CalendarDialog
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
@@ -68,11 +67,11 @@ fun Form(navController: NavController, viewModel: RdvViewModel){
     val startTime = remember { mutableStateOf(
         LocalTime.of(
             LocalTime.now().hour,
-            LocalTime.now().second,0))}
+            LocalTime.now().minute,0))}
     val endTime = remember { mutableStateOf(
         LocalTime.of(
             LocalTime.now().hour,
-            LocalTime.now().second,0))}
+            LocalTime.now().minute,0))}
 
 
     val startCalendarState = rememberSheetState()

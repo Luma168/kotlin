@@ -1,4 +1,4 @@
-package com.example.zee_spot_scratch.data
+package com.example.zee_spot_scratch.domain.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

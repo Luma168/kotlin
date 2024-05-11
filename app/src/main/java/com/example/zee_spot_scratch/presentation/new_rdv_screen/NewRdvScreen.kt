@@ -1,4 +1,4 @@
-package com.example.zee_spot_scratch
+package com.example.zee_spot_scratch.presentation.new_rdv_screen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
@@ -10,10 +10,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.zee_spot_scratch.components.Footer
-import com.example.zee_spot_scratch.components.Form
-import com.example.zee_spot_scratch.components.Header
-import com.example.zee_spot_scratch.data.RdvViewModel
+import com.example.zee_spot_scratch.presentation.common.Footer
+import com.example.zee_spot_scratch.presentation.new_rdv_screen.components.Form
+import com.example.zee_spot_scratch.presentation.common.Header
+import com.example.zee_spot_scratch.presentation.RdvViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)

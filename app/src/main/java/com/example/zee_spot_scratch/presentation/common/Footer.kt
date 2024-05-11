@@ -1,4 +1,4 @@
-package com.example.zee_spot_scratch.components
+package com.example.zee_spot_scratch.presentation.common
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -19,7 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.zee_spot_scratch.Screen
+import com.example.zee_spot_scratch.presentation.navigation.Screen
 
 @Composable
 fun Footer(navController: NavController){

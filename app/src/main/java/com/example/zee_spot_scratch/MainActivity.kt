@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.zee_spot_scratch.presentation.navigation.SetupNavGraph
 import com.example.zee_spot_scratch.ui.theme.ZeeSpotscratchTheme
 import dagger.hilt.android.AndroidEntryPoint
 
