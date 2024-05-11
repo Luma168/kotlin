@@ -27,6 +27,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -259,6 +262,41 @@ private fun LazyItemScope.RdvInformation(
     viewModel: RdvViewModel,
     navController: NavController
 ) {
+    val openDialog = remember { mutableStateOf(false) }
+
+    if (openDialog.value) {
+        AlertDialog(
+            onDismissRequest = { openDialog.value = false },
+            title = { Text("Confirmation de la suppression") },
+            text = { Text("Etes-vous sûr de vouloir supprimer ce rendez-vous?") },
+            confirmButton = {
+                Button(
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFFCD4545),
+                        contentColor = Color.White
+                    ),
+                    onClick = {
+                        viewModel.deleteRdv(rdv)
+                        openDialog.value = false
+                    }
+                ) {
+                    Text("Supprimer")
+                }
+            },
+            dismissButton = {
+                Button(
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFFE8B923),
+                        contentColor = toolbarColor
+                    ),
+                    onClick = { openDialog.value = false }
+                ) {
+                    Text("Annuler")
+                }
+            }
+        )
+    }
+
     Row(
         modifier = Modifier
             .height(130.dp)
@@ -372,7 +410,7 @@ private fun LazyItemScope.RdvInformation(
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            IconButton(onClick = { viewModel.deleteRdv(rdv) }) {
+            IconButton(onClick = { openDialog.value = true }) {
                 Icon(
                     imageVector = Icons.Default.Delete,
                     contentDescription = null,
@@ -390,3 +428,4 @@ private fun LazyItemScope.RdvInformation(
         }
     }
 }
+
