@@ -10,3 +10,6 @@ Application de prise de rendez-vous pro pour les photographes
 
 ## Description :
 Zee-Spot Mobile App est une application de gestion d'agenda qui permet aux utilisateurs d'ajouter, modifier et supprimer des rendez-vous. L'application offre une interface conviviale et un affichage clair dans le calendrier, facilitant ainsi la gestion efficace des rendez-vous et des engagements professionnels.
+
+## utilisation :
+Veuillez utiliser le smartphone Pixel 8 Pro API 30 Car nous avons rencontré une difficulté au niveau du responsive selon la taille du téléphone.
